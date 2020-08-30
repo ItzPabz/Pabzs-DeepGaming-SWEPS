@@ -14,6 +14,7 @@ DeepGaming457 = DeepGaming457 or {}
 
 DeepGaming457.BurnTime = 1 -- the time the player will be on fire for (even after running away from 457)
 DeepGaming457.BurnDistance = 350 -- The distance the victims needs to be within in order to get burned 
+DeepGaming457.AntiSpamTime = 3 -- Time between 457 can re-ignite after manually switching it off
 
 DeepGaming457.StartingSize = 0.75 -- The starting size the player when weakend. (1 is the models normal size)
 DeepGaming457.MaxSize = 1.35 -- The largest ammount the player can become, I dont recommend anything larger than 1.35, or else it may look funky.

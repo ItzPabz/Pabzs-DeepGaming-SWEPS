@@ -8,6 +8,7 @@ SWEP.Author = "ItzPabz"
 SWEP.Instructions = [["Left Click: Attack"]]
 SWEP.Contact = ""
 SWEP.Purpose = ""
+resource.AddFile("sound/deep098swep/scp098-crack.mp3")
 
 SWEP.WorldModel = ""
 SWEP.ViewModel = ""
@@ -43,7 +44,7 @@ function SWEP:PrimaryAttack()
 
     local Tr=util.QuickTrace(self.Owner:GetShootPos(), self.Owner:GetAimVector()*70, {self.Owner})
     if ( (Tr.Hit) && (Tr.Entity) &&  (Tr.Entity:IsPlayer()) ) then
-        self:SetNextPrimaryFire(CurTime() + 1.25)
+        self:SetNextPrimaryFire(CurTime() + DeepGaming098.AttackCooldown)
         self:GetOwner():SetAnimation(5)
         self:GetOwner():EmitSound("deep098swep/scp098-crack.mp3", 35, 155, 1, CHAN_WEAPON)
         if CLIENT then return end

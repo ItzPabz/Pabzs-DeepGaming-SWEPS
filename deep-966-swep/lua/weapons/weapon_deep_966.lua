@@ -1,9 +1,9 @@
 AddCSLuaFile()
-resource.AddFile("deep966swep/scp9661.wav")
-resource.AddFile("deep966swep/scp9662.wav")
-resource.AddFile("deep966swep/scp9663.wav")
-resource.AddFile("deep966swep/scp9664.wav")
-resource.AddFile("deep966swep/scp9665.wav")
+resource.AddFile("sound/deep966swep/scp9661.wav")
+resource.AddFile("sound/deep966swep/scp9662.wav")
+resource.AddFile("sound/deep966swep/scp9663.wav")
+resource.AddFile("sound/deep966swep/scp9664.wav")
+resource.AddFile("sound/deep966swep/scp9665.wav")
 SWEP.Slot = 3
 SWEP.SlotPos = 1
 SWEP.DrawAmmo = false
@@ -139,42 +139,43 @@ end
 
 
 hook.Add( "PreDrawHalos", "scp966see966", function()
-if DeepGaming966.HighlightTeam == true then
+    if DeepGaming966.HighlightTeam then
 
-    localply = LocalPlayer()
-    if localply:IsPlayer() and localply:Alive() and localply:HasWeapon("weapon_deep_966") then
+        localply = LocalPlayer()
+        if localply:IsPlayer() and localply:Alive() and localply:HasWeapon("weapon_deep_966") then
 
-        local scp966s = {}
-        local i = 0
-        for _, ply in pairs(player.GetAll()) do
-            if ply:Alive() and ( ply:HasWeapon("weapon_deep_966") ) then
-                i = i + 1
-                scp966s[i] = ply
+            local scp966s = {}
+            local i = 0
+            for _, ply in pairs(player.GetAll()) do
+                if ply:Alive() and ( ply:HasWeapon("weapon_deep_966") ) then
+                    i = i + 1
+                    scp966s[i] = ply
+                end
             end
+            halo.Add( scp966s, Color( 0, 255, 0 ), 2, 2, 1, true, DeepGaming966.HighlightTeamThroughWall )
         end
-        halo.Add( scp966s, Color( 0, 255, 0 ), 2, 2, 1, true, DeepGaming966.HighlightTeamThroughWall )
-    end
 
-end
+    end
 end )
 
 
 hook.Add( "PreDrawHalos", "scp966seeFLIR", function()
-if DeepGaming966.SenseFLIR == true then
 
-    localply = LocalPlayer()
-    if localply:IsPlayer() and localply:Alive() and localply:HasWeapon("weapon_deep_966") then
-
-        local flirEnms = {}
-        local i = 0
-        for _, ply in pairs(player.GetAll()) do
-            if ply:Alive() and ply:GetActiveWeapon() == "weapon_deep_flir" then
-                i = i + 1
-                flirEnms[i] = ply
+    if DeepGaming966.SenseFLIR then
+        localply = LocalPlayer()
+        if localply:IsPlayer() and localply:Alive() and localply:HasWeapon("weapon_deep_966") then
+            local flirEnms = {}
+            local i = 0
+            for _, ply in pairs(player.GetAll()) do
+                if ply:IsValid() and ply:Alive() then
+                    if IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "weapon_deep_flir" then
+                        i = i + 1
+                        flirEnms[i] = ply
+                    end
+                end
             end
+            halo.Add( flirEnms, Color( 255, 0, 0 ), 2, 2, 1, true, true )
         end
-        halo.Add( flirEnms, Color( 255, 0, 0 ), 2, 2, 1, true, true )
     end
 
-end
-end )
+end ) 

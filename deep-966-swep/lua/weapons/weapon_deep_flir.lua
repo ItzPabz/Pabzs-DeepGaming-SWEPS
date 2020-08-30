@@ -67,7 +67,7 @@ local flircameffect = {
 
 hook.Add("RenderScreenspaceEffects", "flirFilter", function()
 
-    if activateFlirCam == true then
+    if activateFlirCam then
 
     localply = LocalPlayer()
     if localply:IsPlayer() and localply:Alive() and ( localply:GetActiveWeapon():GetClass() == "weapon_deep_flir" ) then
@@ -78,14 +78,14 @@ hook.Add("RenderScreenspaceEffects", "flirFilter", function()
 end )
 
 hook.Add( "PreDrawHalos", "highlighthostiles", function()
-    if activateFlirCam == true then
+    if activateFlirCam then
 
     localply = LocalPlayer()
     if localply:IsPlayer() and localply:Alive() and ( localply:GetActiveWeapon():GetClass() == "weapon_deep_flir" ) then
 
         local victims = {}
         local i = 0
-        for _, ply in pairs(player.GetAll()) do
+        for _, ply in ipairs(player.GetAll()) do
             if ply:Alive() and ply:HasWeapon( "weapon_deep_966" ) then
                 i = i + 1
                 victims[i] = ply

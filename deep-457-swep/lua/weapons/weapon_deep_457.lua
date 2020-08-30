@@ -32,10 +32,13 @@ SWEP.Secondary.Ammo = ""
 
 local passivematerial = Material( "materials/scp457-custom/passive.png" ) 
 local activematerial = Material( "materials/scp457-custom/onfire.png" )
+resource.AddFile( "materials/scp457-custom/passive.png" )
+resource.AddFile( "materials/scp457-custom/onfire.png" )
 
 
 local delay457 = DeepGaming457.HeatWaveCooldown
 local nextOccurance457 = 0 
+local current457EffectStatus = 0
 
 local function spec457Ability(wep, playerself)
 
@@ -90,6 +93,7 @@ end
 function SWEP:SecondaryAttack()
     current457EffectStatus = 0
     self:GetOwner():SetModelScale( DeepGaming457.StartingSize, 25 )
+
 end 
 
 if DeepGaming457.EnableHeatWave == true then
@@ -117,7 +121,8 @@ function SWEP:DrawHUD()
     surface.SetDrawColor( 255, 255, 255, 255 )
     if current457EffectStatus == 1 then
         surface.SetMaterial( activematerial )
-    else
+    end
+    if current457EffectStatus == 0 then
         surface.SetMaterial( passivematerial ) 
     end
     surface.DrawTexturedRect( ScrW()/2 - 110, ScrH()/1.5, 160, 160 )
@@ -133,13 +138,14 @@ hook.Add( "ExtinguisherDoExtinguish", "scp457BeGone", function( ply )
 return true end )
 
 
-function SWEP:OnRemove()
+if CLIENT then
+    function SWEP:OnRemove()
     current457EffectStatus = 0
-    if SERVER then
-        for _, ply in ipairs( player.GetAll() ) do
-            if ply:HasWeapon( "weapon_deep_457" ) then
-                ply:GodDisable()
-            end
-        end
+    end
+end
+
+if SERVER then 
+    function SWEP:OnRemove()
+    self:GetOwner():GodDisable()
     end
 end
