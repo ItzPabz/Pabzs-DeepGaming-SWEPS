@@ -16,8 +16,6 @@ DeepGamingFE = DeepGamingFE or {}
 DeepGamingFE.MenuKey = F6 -- The key used to open the menu.
 DeepGamingFE.MenuTitle = "Foundation Enforcement Record Manager"
 
-DeepGamingFE.ChatCommand = "!records" -- The chat command used to open the FE Record Manager
-
 DeepGamingFE.PoliceJobs = { -- Add all jobs that can view and add
     [ "Hobo" ] = true, 
 }
