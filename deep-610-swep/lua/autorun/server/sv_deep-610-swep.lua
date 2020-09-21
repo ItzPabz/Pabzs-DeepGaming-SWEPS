@@ -70,7 +70,7 @@ end)
 
 hook.Add("zbl_BlockInfection", "blockSCPInfection", function(ply, vaccine_id)
 
-     if DeepGaming610.ImmuneJobs[ team.GetName( ply:Team() )] then
+     if DeepGaming610.GenLabsImmuneJobs[ team.GetName( ply:Team() )] then
         return true
      end
 end)
