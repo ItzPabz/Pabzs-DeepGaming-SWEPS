@@ -30,11 +30,10 @@ if !ply:HasWeapon("weapon_deep_610") then return end
 end )
 
 hook.Add( "EntityTakeDamage", "downscale610Dmg", function( target, dmginfo )
-    if ( target:HasWeapon("weapon_deep_610-3") ) then
-            dmginfo:ScaleDamage( DeepGaming610.DeceitDamageMulti ) 
+    if ( target:GetActiveWeapon():GetClass() == "weapon_deep_610-3" ) then
+        dmginfo:ScaleDamage( DeepGaming610.DeceitDamageMulti 
 	end
 end )
-
 
 local killerWeapons = {
     ["weapon_deep_610-1"] = true,
