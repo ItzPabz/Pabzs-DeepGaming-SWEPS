@@ -8,7 +8,6 @@ SWEP.Author = "ItzPabz"
 SWEP.Instructions = [["Left Click: Attack"]]
 SWEP.Contact = ""
 SWEP.Purpose = ""
-
 SWEP.WorldModel = ""
 SWEP.ViewModel = ""
 SWEP.ViewModelFOV = 62
@@ -35,18 +34,19 @@ function SWEP:PrimaryAttack()
     self:SetHoldType("normal")
 	self:SetNextPrimaryFire( CurTime() + 0.5 )	
 	self:ThrowChair( "models/props/cs_office/Chair_office.mdl" )
+	self:GetOwner():EmitSound("damien_japwell/fuck-you.mp3", 35, 100, 1, CHAN_WEAPON)
 end
  
 
 function SWEP:SecondaryAttack()
 	self:SetNextSecondaryFire( CurTime() + 0.1 )
 	self:ThrowChair( "models/props_c17/FurnitureChair001a.mdl" )
+	self:GetOwner():EmitSound("damien_japwell/fuck-off.mp3", 35, 100, 1, CHAN_WEAPON)
 end
 
 function SWEP:ThrowChair( model_file )
 	local owner = self:GetOwner()
 	if ( not owner:IsValid() ) then return end
-	self:EmitSound( self.ShootSound )
 	if ( CLIENT ) then return end
 	local ent = ents.Create( "prop_physics" )
 	if ( not ent:IsValid() ) then return end

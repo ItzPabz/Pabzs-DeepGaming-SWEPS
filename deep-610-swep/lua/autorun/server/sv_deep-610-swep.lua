@@ -3,6 +3,8 @@ util.AddNetworkString( "get610Model" )
 resource.AddSingleFile( "materials/scp610logos/resurrection.png" )
 resource.AddSingleFile( "materials/scp610logos/bloodsucker.png" )
 resource.AddSingleFile( "materials/scp610logos/deceit.png" )
+resource.AddFile("sound/damien_japwell/fuck-off.mp3")
+resource.AddFile("sound/damien_japwell/fuck-you.mp3")
 
 net.Receive( "get610Model", function( len, ply )
 if !ply:HasWeapon("weapon_deep_610") then return end
