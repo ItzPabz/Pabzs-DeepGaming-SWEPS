@@ -77,7 +77,11 @@ function SWEP:OnRemove()
 end
 
 hook.Add("PlayerDeath", "copyCat610", function( ply, ent, killer )
-    if killer:GetActiveWeapon():GetClass() == "weapon_deep_610-3" then
+    if ( ply == killer ) then return end
+    if !IsValid(killer) then return end
+    if !killer:Alive() then return end
+    if !killer:IsPlayer() then return end
+    if killer:HasWeapon("weapon_deep_610-3") then
         local getvictimmodel = ply:GetModel()
         killer:SetModel(getvictimmodel)
     end
