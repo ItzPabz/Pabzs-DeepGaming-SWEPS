@@ -34,7 +34,7 @@ end )
 hook.Add( "EntityTakeDamage", "downscale610Dmg", function( target, dmginfo )
     if target:IsValid() and target:HasWeapon("weapon_deep_610-3")  then
         dmginfo:ScaleDamage( DeepGaming610.DeceitDamageMulti )
-	end
+	else return end
 end )
 
 
