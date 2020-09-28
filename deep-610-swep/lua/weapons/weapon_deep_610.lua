@@ -116,9 +116,8 @@ end
 function SWEP:Initialize()
     if SERVER then return end
     self:SetHoldType( "knife" )
-    scp610Menu()
+    if LocalPlayer() == self.Owner then scp610Menu() end
 end
-
 
 function SWEP:Deploy()
 

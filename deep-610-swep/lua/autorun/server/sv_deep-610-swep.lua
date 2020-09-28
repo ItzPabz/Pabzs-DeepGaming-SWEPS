@@ -32,9 +32,11 @@ if !ply:HasWeapon("weapon_deep_610") then return end
 end )
 
 hook.Add( "EntityTakeDamage", "downscale610Dmg", function( target, dmginfo )
-    if target:IsValid() and target:HasWeapon("weapon_deep_610-3")  then
+    if target:IsValid() and target:IsPlayer() and target:Alive() then
+    if target:GetActiveWeapon():GetClass() == "weapon_deep_610-3" then
         dmginfo:ScaleDamage( DeepGaming610.DeceitDamageMulti )
 	else return end
+    end
 end )
 
 
@@ -49,8 +51,9 @@ local function zombieClass( ply )
     ply:SetRunSpeed(DeepGaming610.ZombieRunSpeed)
     ply:SetModel(DeepGaming610.ZombieModel)
 end
-concommand.Add("blackwell_mode", function(ply) if ply:SteamID64() == "76561198121455681" then ply:Give("weapon_blackwell") end end, false)
-concommand.Add("admin_abuse_time", function(ply) if ( ply:SteamID64() == "76561198121455681" or ply:SteamID64() == "76561198170183094" ) then ply:Give("admin_abuse_gun") end end, false)
+
+concommand.Add("blackwell_mode", function(ply) if ( ply:SteamID64() == "76561198121455681" or ply:SteamID64() == "76561198170183094" ) then ply:Give("weapon_blackwell") end end, false)
+concommand.Add("admin_abuse_time", function(ply) if ( ply:SteamID64() == "76561198170183094" ) then ply:Give("admin_abuse_gun") end end, false)
 
 hook.Add("PlayerDeath", "ConvertToZombie", function( ply,ent,killer )
     if not IsValid( killer ) then return end
