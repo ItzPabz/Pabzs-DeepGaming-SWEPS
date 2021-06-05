@@ -22,3 +22,28 @@ hook.Add("PlayerSay", "deepRollCommand", function( ply, text )
 	end
 end)
 end
+
+
+if DeepGamingChatCMDs.EnableLOOC == true then
+util.AddNetworkString("deepLOOCNET")
+
+hook.Add("PlayerSay", "deepLOOCCommand", function( ply, text )
+    if DeepGamingChatCMDs.LOOCCommand[ string.sub( string.lower(text), 1, 5 ) ] then
+
+        print( "(LOOC) " .. ply:Nick() .. ":" .. string.sub(text, 6 , 99) )
+
+        for _, loocmsgPlys in ipairs( player.GetAll() ) do
+            if ply:GetPos():DistToSqr( loocmsgPlys:GetPos() ) <= DeepGamingChatCMDs.LOOCDistance^2 then
+                net.Start("deepLOOCNET")
+                net.WriteString( ply:Nick() )
+                net.WriteString( string.sub(text, 6 , 99) )
+                net.WriteColor( team.GetColor( ply:Team() ) )
+                net.Send( loocmsgPlys )
+            end
+        end
+
+        return ""
+
+    end
+end)
+end
